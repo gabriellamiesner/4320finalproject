@@ -19,16 +19,11 @@ def generate_seating_chart():
     file.close()
     
     reserved_seats = []
-    # for line in file_data:
-    #     reservation_record = line.split((","))
-    #     seat_row = int(seat_record[1])
-    #     seat_col = int(seat_record[2])
-    #     seat_record = [seat_row, seat_col]
-    #     reserved_seats.append(seat_record)
-    # for row in range(11):
-    #     seats_in_row = []
-    #     reserved = False
-    #     for col in range(3):
+    for line in file_data:
+        reservation_record = line.split((","))
+        seat_row = int(reservation_record[1])
+        seat_col = int(reservation_record[2])
+        seat_chart[seat_row][seat_col] = 'X'
 
     return seat_chart
 
@@ -38,8 +33,21 @@ def initialize_seat_chart():
         seat_chart.append(['O', 'O', 'O', 'O'])
     return seat_chart
 
-# def format_seat_chart(seat_chart):
-#     seat_string = ""
-#     for row in seat_chart:
-#         seat_string += str(row) + '\n'
-#     return seat_string
+# From project instructions
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+def calculate_total_flight_sales():
+    cost_matrix = get_cost_matrix()
+    seating_chart = generate_seating_chart()
+    total_cost = 0
+    row_index = 0
+    for row in seating_chart:
+        col_index = 0
+        for col in row:
+            if seating_chart[row_index][col_index] == 'X':
+                total_cost += cost_matrix[row_index][col_index]
+            col_index += 1
+        row_index += 1
+    return total_cost
