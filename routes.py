@@ -33,7 +33,7 @@ def admin():
         password = request.form['password']
         
         if validate_user(username, password):
-            seating_chart = "There's gonna be a seating chart here trust me"
+            seating_chart = generate_seating_chart()
             
             # CODE FOR SEATING CHART AND TOTAL SALES:
             #########################################

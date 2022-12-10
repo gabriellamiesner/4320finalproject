@@ -7,12 +7,22 @@
 {% block content %}
 <div class="formwrapper">
   <div style = "display: flex;justify-content: flex-end;">
-  <a href = "/" style = "padding-right:1rem;padding-left:1rem;">Home </a>    |
-  <a href = "/admin" style = "padding-right: 1rem;padding-left:1rem;" >Admin</a>    | 
-  <a href = "/reservations" style = "padding-right: 1rem;padding-left:1rem;"> Reservations</a>
-</div>
+    <a href = "/" style = "padding-right:1rem;padding-left:1rem;">Home </a>    |
+    <a href = "/admin" style = "padding-right: 1rem;padding-left:1rem;" >Admin</a>    | 
+    <a href = "/reservations" style = "padding-right: 1rem;padding-left:1rem;"> Reservations</a>
+  </div>
   <h2 class="title">Administrator Login</h2>
-  
+  {% if err %}
+        <p>{{ err }}</p>
+  {% endif %}
+  {% if seating_chart %}
+        <div class="seating_chart">
+          {% for row in seating_chart %}
+            <p>{{ row }}</p>
+          {% endfor %}
+        </div>
+        <!-- <p>{{ seating_chart }}</p> -->
+  {% endif %}
   <form method="POST" action="/admin">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.username.label }} {{ form.username }}
