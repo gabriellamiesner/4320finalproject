@@ -6,17 +6,19 @@
 
 {% block content %}
 <div class="formwrapper">
-    <div style = "display: flex;justify-content: flex-end;">
-    <a href = "/" style = "padding-right:1rem;padding-left:1rem;">Home </a>    |
-    <a href = "/admin" style = "padding-right: 1rem;padding-left:1rem;" >Admin</a>    | 
-    <a href = "/reservations" style = "padding-right: 1rem;padding-left:1rem;"> Reservations</a>
-  </div>
   <h2 class="title">Reserve Your Seat</h2>
-
+  
   <h2>Seating Chart</h2>
   <p>X = Reserved seat; O = Available seat</p>
-  
-  <form method="POST" action="/admin">
+  {% if seating_chart %}
+        <div class="seating_chart" style = "background: #C1C5C6; border-radius: 2rem; padding:5%; ">
+          {% for row in seating_chart %}
+            <p>{{ row }}</p>
+          {% endfor %}
+        </div>
+  {% endif %}
+
+  <form method="POST" action="/reservations">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
         {% if form.first_name.errors %}
