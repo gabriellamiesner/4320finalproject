@@ -56,19 +56,38 @@ def generate_reservation_code(fname):
     reservation_code = ""
     code_string = 'INFOTC1040'
     num_of_letters = 0
+
+    for x, y in zip(fname, code_string):
+        reservation_code += x + y
+
+    if len(fname) > len(code_string):
+        reservation_code += fname[len(code_string)]
+    else: 
+        reservation_code += code_string[len(fname)]
     if len(fname) >= len(code_string):
         num_of_letters = len(fname)
     else:
         num_of_letters = len(code_string)
-    for letter in range(num_of_letters - 1):
-        try:
-            reservation_code += fname[letter] + code_string[letter]
-            fname = fname[1:]
-            code_string = code_string[1:]
-        except:
-            continue
-    reservation_code += fname + code_string
+    
     return reservation_code
+
+
+#     reservation_code = ""
+#     code_string = 'INFOTC1040'
+#     num_of_letters = 0
+#     if len(fname) >= len(code_string):
+#         num_of_letters = len(fname)
+#     else:
+#         num_of_letters = len(code_string)
+#     for letter in range(num_of_letters - 1):
+#         try:
+#             reservation_code += fname[letter] + code_string[letter]
+#             fname = fname[1:]
+#             code_string = code_string[1:]
+#         except:
+#             continue
+#     reservation_code += fname + code_string
+#     return reservation_code
 
 def save_reservation(fname, lname, row, seat):
     reservation_code = generate_reservation_code(fname)
