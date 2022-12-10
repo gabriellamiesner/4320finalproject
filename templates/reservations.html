@@ -1,0 +1,59 @@
+{% extends 'layout.jinja2' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="formwrapper">
+    <div style = "display: flex;justify-content: flex-end;">
+    <a href = "/" style = "padding-right:1rem;padding-left:1rem;">Home </a>    |
+    <a href = "/admin" style = "padding-right: 1rem;padding-left:1rem;" >Admin</a>    | 
+    <a href = "/reservations" style = "padding-right: 1rem;padding-left:1rem;"> Reservations</a>
+  </div>
+  <h2 class="title">Reserve Your Seat</h2>
+  
+  <form method="POST" action="/admin">
+      {{ form.csrf_token }}
+      <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
+        {% if form.first_name.errors %}
+          <ul class="errors">
+            {% for error in form.first_name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="form-field">{{ form.last_name.label }} {{ form.last_name }}
+        {% if form.last_name.errors %}
+          <ul class="errors">
+            {% for error in form.last_name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="form-field">{{ form.row.label }} {{ form.row }}
+        {% if form.row.errors %}
+          <ul class="errors">
+            {% for error in form.row.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="form-field">{{ form.seat.label }} {{ form.seat }}
+        {% if form.seat.errors %}
+          <ul class="errors">
+            {% for error in form.seat.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      
+      {{ form.reserve }}
+  </form>
+  
+</div>
+{% endblock %}
