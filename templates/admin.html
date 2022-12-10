@@ -10,6 +10,9 @@
   {% if err %}
         <p>{{ err }}</p>
   {% endif %}
+  {% if seating_chart %}
+        <p>{{ seating_chart }}</p>
+  {% endif %}
   <form method="POST" action="/admin">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.username.label }} {{ form.username }}

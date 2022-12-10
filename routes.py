@@ -26,27 +26,28 @@ def admin():
     form = AdminLoginForm()
 
     err = None
+    seating_chart = None
+
     if request.method == 'POST' and form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
         
         if validate_user(username, password):
-            err = None
-
+            seating_chart = "There's gonna be a seating chart here trust me"
+            
             # CODE FOR SEATING CHART AND TOTAL SALES:
             #########################################
 
-            # - Use the revervations.py file and the cost matrix code to generate seating chart and total sales/cost
+            # - Use the reservations.py file and the cost matrix code to generate seating chart and total sales/cost
             # - Code can be developed here to ensure it's working, but should ideally be formatted in functions in the functions.py file for organization and clarity
 
             #########################################
 
 
-
         else:
             err = "User does not exist."
 
-    return render_template("admin.html", form=form, template="form-template", err = err)
+    return render_template("admin.html", form=form, template="form-template", err = err, seating_chart = seating_chart)
 
 @app.route("/reservations", methods=['GET', 'POST'])
 def reservations():
